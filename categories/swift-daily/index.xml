@@ -1,0 +1,1085 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Swift Daily on Nathan Barta</title><link>https://nathanbarta.com/categories/swift-daily/</link><description>Recent content in Swift Daily on Nathan Barta</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 15 Sep 2022 00:00:01 +0000</lastBuildDate><atom:link href="https://nathanbarta.com/categories/swift-daily/index.xml" rel="self" type="application/rss+xml"/><item><title>Day #73</title><link>https://nathanbarta.com/p/swift-daily-73/</link><pubDate>Thu, 15 Sep 2022 00:00:01 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-73/</guid><description>&lt;p>A metatype is a type of a type. OK post done…..jk&lt;/p>
+&lt;p>Metatypes are used to access properties and methods (including initializers) belonging to a type - in contrast to an instance. Every time you use a static property or function, you are using a Metatype.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">whatsGoingOnHere&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Int&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kr">Type&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="nb">Int&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kc">self&lt;/span> &lt;span class="c1">// Int.Type is a type, and Int.self is an instance&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">a&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">SomeClass&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1">// what’s actually happening is SomeClass.self.init()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>They are helpful for generic code. In fact, Codable &amp;amp; UITableView have methods using parameters of X.Type.&lt;/p>
+&lt;p>To be continued…&lt;/p>
+&lt;p>&lt;em>Originally published 09/15/2022 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/20/2022.&lt;/em>&lt;/p></description></item><item><title>Day #72</title><link>https://nathanbarta.com/p/swift-daily-72/</link><pubDate>Thu, 15 Sep 2022 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-72/</guid><description>&lt;p>Xcode 12 introduced svg support - meaning you can put svg assets in the /assets folder.&lt;/p>
+&lt;p>&lt;em>Originally published 09/15/2022 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/20/2022.&lt;/em>&lt;/p></description></item><item><title>Day #71</title><link>https://nathanbarta.com/p/swift-daily-71/</link><pubDate>Tue, 13 Sep 2022 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-71/</guid><description>&lt;p>Starting with iOS 11, and the iPhone 5s (2013), iOS devices have been 64bit instead of 32bit. Apple watches were updated to 64bit in 2016, model: s2. You can still build to 32bit architecture - however it’s basically useless since almost no devices at this point run on it.&lt;/p>
+&lt;p>&lt;em>Originally published 09/13/2022 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/20/2022.&lt;/em>&lt;/p></description></item><item><title>Day #70</title><link>https://nathanbarta.com/p/swift-daily-70/</link><pubDate>Mon, 12 Sep 2022 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-70/</guid><description>&lt;p>The maximum size of an app is 4gb - uncompressed. For iOS 9+ the max executable size is 500mb, which is 8.33x larger than what was allowed for iOS 7-8. Apple Watch has a restriction of 75mb.&lt;/p>
+&lt;p>&lt;em>Originally published 09/12/2022 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/20/2022.&lt;/em>&lt;/p></description></item><item><title>Day #68</title><link>https://nathanbarta.com/p/swift-daily-68/</link><pubDate>Thu, 08 Sep 2022 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-68/</guid><description>&lt;p>Swift used to have prefix and postfix inc/dec operators, but they were removed in Swift v3.&lt;/p>
+&lt;p>&lt;em>Originally published 09/08/2022 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/20/2022.&lt;/em>&lt;/p></description></item><item><title>Day #67</title><link>https://nathanbarta.com/p/swift-daily-67/</link><pubDate>Fri, 22 Oct 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-67/</guid><description>&lt;p>You do not need to include the “return” keyword inside a function with one expression.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">myFunction&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">-&amp;gt;&lt;/span> &lt;span class="nb">String&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="s">&amp;#34;Boo&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 10/22/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/20/2022.&lt;/em>&lt;/p></description></item><item><title>Day #60</title><link>https://nathanbarta.com/p/swift-daily-60/</link><pubDate>Fri, 15 Oct 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-60/</guid><description>&lt;p>This is the implementation behind optionals in swift:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">enum&lt;/span> &lt;span class="nc">Optional&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">some&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="kr">none&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>It is an algebraic data type. Swift has syntax to help make optionals more usable (if let, guard let, etc.)&lt;/p>
+&lt;p>&lt;em>Originally published 10/15/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/20/2022.&lt;/em>&lt;/p></description></item><item><title>Day #58</title><link>https://nathanbarta.com/p/swift-daily-58/</link><pubDate>Wed, 13 Oct 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-58/</guid><description>&lt;p>Xcode 6.0 was the first version to allow Swift integration into the SDK. It was 2014 at the time and iPhones were running iOS 8.0.&lt;/p>
+&lt;p>&lt;em>Originally published 10/13/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/20/2022.&lt;/em>&lt;/p></description></item><item><title>Day #57</title><link>https://nathanbarta.com/p/swift-daily-57/</link><pubDate>Tue, 12 Oct 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-57/</guid><description>&lt;p>iCloud had a predecessor called MobileMe, which was a collection of software and tools packaged in a $100/y subscription sold by Apple.&lt;/p>
+&lt;p>&lt;em>Originally published 10/12/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/20/2022.&lt;/em>&lt;/p></description></item><item><title>Day #54</title><link>https://nathanbarta.com/p/swift-daily-54/</link><pubDate>Sat, 09 Oct 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-54/</guid><description>&lt;p>iPhones were not originally intended to run 3rd party native apps. Steve Jobs envisioned developers using the on-device safari app as an engine for web apps. iOS 2.0 (called iPhone OS back then) brought the app store which allowed native running applications. Now iOS 11.3+ supports progressive web apps, which is basically a hybrid between a native app and a web app (very containerized).&lt;/p>
+&lt;p>&lt;em>Originally published 10/09/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/16/2022.&lt;/em>&lt;/p></description></item><item><title>Day #52</title><link>https://nathanbarta.com/p/swift-daily-52/</link><pubDate>Thu, 07 Oct 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-52/</guid><description>&lt;p>Kotlin has interop with objc (and therefore some interop with Swift too.) It might be possible to recycle code between an android and iOS application. Although, you should remember that objc code is generally slower than Swift. So maybe recycle authentication code, but not some API client that gets used often.&lt;/p>
+&lt;p>&lt;em>Originally published 10/07/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/16/2022.&lt;/em>&lt;/p></description></item><item><title>Day #51</title><link>https://nathanbarta.com/p/swift-daily-51/</link><pubDate>Wed, 06 Oct 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-51/</guid><description>&lt;p>Bridging between data structures (set, array, dict) in swift and objc is usually O(1) time space complexity. If elements in these data structures are not classes or objc protocols or bridgeable to a foundation type they will be lazily converted on call, which is O(n). So…. do your research - some stuff is toll free, but some stuff is not.&lt;/p>
+&lt;p>&lt;em>Originally published 10/06/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/16/2022.&lt;/em>&lt;/p></description></item><item><title>Day #49</title><link>https://nathanbarta.com/p/swift-daily-49/</link><pubDate>Mon, 04 Oct 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-49/</guid><description>&lt;p>Chris Lattner, the creator of Swift, is also responsible for LLVM and the Clang project.&lt;/p>
+&lt;p>&lt;em>Originally published 10/04/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/16/2022.&lt;/em>&lt;/p></description></item><item><title>Day #48</title><link>https://nathanbarta.com/p/swift-daily-48/</link><pubDate>Sun, 03 Oct 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-48/</guid><description>&lt;p>Swift is old enough to have influenced other languages. Rust’s optional bindings (the “if let” pattern in Swift) are credited to Swift.&lt;/p>
+&lt;p>&lt;a class="link" href="https://doc.rust-lang.org/reference/influences.html" target="_blank" rel="noopener"
+>https://doc.rust-lang.org/reference/influences.html&lt;/a>&lt;/p>
+&lt;p>&lt;em>Originally published 10/03/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/16/2022.&lt;/em>&lt;/p></description></item><item><title>Day #47</title><link>https://nathanbarta.com/p/swift-daily-47/</link><pubDate>Sat, 02 Oct 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-47/</guid><description>&lt;p>You can code apps without Xcode. Everyone knows Xcode can be a hastle some times, but it really is the best way to program iOS/macOS applications. You can build iOS apps just how you’d build other software, but it gets annoying pretty fast. At some point, you will rely on the Xcode SDK/toolchain to sign your application for distribution.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://betterprogramming.pub/writing-ios-apps-without-xcode-89450d0de21a" target="_blank" rel="noopener"
+>https://betterprogramming.pub/writing-ios-apps-without-xcode-89450d0de21a&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://stackoverflow.com/questions/61464644/i-have-xcode-command-line-tools-do-i-really-need-the-xcode-gui-to-develop-ios-a" target="_blank" rel="noopener"
+>https://stackoverflow.com/questions/61464644/i-have-xcode-command-line-tools-do-i-really-need-the-xcode-gui-to-develop-ios-a&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;em>Originally published 10/02/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/16/2022.&lt;/em>&lt;/p></description></item><item><title>Day #46</title><link>https://nathanbarta.com/p/swift-daily-46/</link><pubDate>Fri, 01 Oct 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-46/</guid><description>&lt;p>Little bit of a history lesson. As you probably know, Swift was made by Apple. However, it is now open source. It was made open source in December 3 2015, only a year after launch. People tend to criticize Swift for being an “Apple Language” yet it has been independent for years.&lt;/p>
+&lt;p>You can track the progress of the language on &lt;a class="link" href="https://swift.org/" target="_blank" rel="noopener"
+>https://swift.org/&lt;/a> and &lt;a class="link" href="https://github.com/apple/swift" target="_blank" rel="noopener"
+>https://github.com/apple/swift&lt;/a>&lt;/p>
+&lt;p>&lt;em>Originally published 10/01/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/16/2022.&lt;/em>&lt;/p></description></item><item><title>Day #44</title><link>https://nathanbarta.com/p/swift-daily-44/</link><pubDate>Wed, 29 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-44/</guid><description>&lt;p>Apple released a new API with iOS 15 called SharePlay. It’s basically a tool to sync media between people on a FaceTime call. For instance, you can watch a movie as a group - all while being physically distant. You may have heard that android users can now FaceTime too (with Facetime links), it’s all part of a FaceTime revamp.&lt;/p>
+&lt;p>&lt;em>Originally published 09/29/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/16/2022.&lt;/em>&lt;/p></description></item><item><title>Day #43</title><link>https://nathanbarta.com/p/swift-daily-43/</link><pubDate>Tue, 28 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-43/</guid><description>&lt;p>Rethows is a keyword to indicate that a function is wrapping around a throwing function.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">iThrow&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="kr">throws&lt;/span> &lt;span class="p">-&amp;gt;&lt;/span> &lt;span class="nb">Bool&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">iDontThrow&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">-&amp;gt;&lt;/span> &lt;span class="nb">Bool&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">iWrap&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">t&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nb">Void&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">-&amp;gt;&lt;/span> &lt;span class="kr">throws&lt;/span> &lt;span class="nb">Bool&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="kr">rethrows&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>iWrap can wrap either of the functions. During compilation, Swift can tell if the wrapped function throws or not - which means it will not ask you to implement try/catch for a iDontThrow() parameter.&lt;/p>
+&lt;p>&lt;em>Originally published 09/28/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/16/2022.&lt;/em>&lt;/p></description></item><item><title>Day #42</title><link>https://nathanbarta.com/p/swift-daily-42/</link><pubDate>Mon, 27 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-42/</guid><description>&lt;p>In celebration of the creation of rust-dev branch, we’ll be having a themed post today.&lt;/p>
+&lt;p>Various people have worked on creating objc/swift bindings to rust. Is this knowledge really useful? Probably not. Have fun.&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://belkadan.com/blog/2020/08/Objective-Rust/" target="_blank" rel="noopener"
+>https://belkadan.com/blog/2020/08/Objective-Rust/&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://crates.io/crates/objc" target="_blank" rel="noopener"
+>https://crates.io/crates/objc&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://sasheldon.com/blog/2014/11/28/interoperating-between-objective-c-and-rust/" target="_blank" rel="noopener"
+>https://sasheldon.com/blog/2014/11/28/interoperating-between-objective-c-and-rust/&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/nvzqz/swift-bindgen" target="_blank" rel="noopener"
+>https://github.com/nvzqz/swift-bindgen&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;p>&lt;em>Originally published 09/27/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/16/2022.&lt;/em>&lt;/p></description></item><item><title>Day #41</title><link>https://nathanbarta.com/p/swift-daily-41/</link><pubDate>Sun, 26 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-41/</guid><description>&lt;p>Enum logic: You can clean up a lot of code by hiding logic in an enum.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">enum&lt;/span> &lt;span class="nc">Genre&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">fiction&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">scifi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">nonFiction&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">history&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">science&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">medical&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">other&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">String&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">//Associated value&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">var&lt;/span> &lt;span class="nv">isSciencey&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Bool&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">switch&lt;/span> &lt;span class="kc">self&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">scifi&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">science&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">medical&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">default&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="kc">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//The code above lets us do this:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">isSciencey&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">someGenre&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">isSciencey&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//Instead of this:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">isSciencey&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">someGenre&lt;/span> &lt;span class="p">==&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">scifi&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="n">someGenre&lt;/span> &lt;span class="p">==&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">science&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="n">someGenre&lt;/span> &lt;span class="p">==&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">medical&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 09/26/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #40</title><link>https://nathanbarta.com/p/swift-daily-40/</link><pubDate>Sat, 25 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-40/</guid><description>&lt;p>Yesterday’s feature gets a little bit more advanced.&lt;/p>
+&lt;p>You can actually do matching with it!&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">enum&lt;/span> &lt;span class="nc">MyEnum&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">multiple&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">_&lt;/span> &lt;span class="n">firstValue&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">String&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">_&lt;/span> &lt;span class="n">secondValue&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Int&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="k">case&lt;/span> &lt;span class="kd">let&lt;/span> &lt;span class="nv">MyEnum&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">multiple&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">_&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">theSecondValue&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">multiple&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s">&amp;#34;anything&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="mi">10&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// True no matter what `firstValue` is&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="bp">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">theSecondValue&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>Code credit: Dustin @ Strega’s Gate&lt;/strong>&lt;/p>
+&lt;p>&lt;em>Originally published 09/25/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #39</title><link>https://nathanbarta.com/p/swift-daily-39/</link><pubDate>Fri, 24 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-39/</guid><description>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Lets take an old example&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">enum&lt;/span> &lt;span class="nc">Genre&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">fiction&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">scifi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">nonFiction&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">history&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">science&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">medical&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">other&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">String&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">//Associated value&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// The defacto method for pulling out associated values invloves a switch statement&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">switch&lt;/span> &lt;span class="n">genre&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">fiction&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">other&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nv">name&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="bp">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// However there is actually another method to pull out just the associated value&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="k">case&lt;/span> &lt;span class="kd">let&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">other&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">==&lt;/span> &lt;span class="s">&amp;#34;poetry&amp;#34;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="bp">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//or &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="k">case&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">other&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nv">name&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">==&lt;/span> &lt;span class="s">&amp;#34;poetry&amp;#34;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="bp">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 09/24/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #38</title><link>https://nathanbarta.com/p/swift-daily-38/</link><pubDate>Thu, 23 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-38/</guid><description>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//Marking vars with the &amp;#34;lazy&amp;#34; keyword will make it so they are only initialized if called, and only initialized once.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kr">lazy&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">dateFormatter&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">DateFormatter&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//One cool feature of Swift a lot of people don&amp;#39;t realize is that constants work the same way!! The following object will only be initialized if/when it gets called. It&amp;#39;s even thread-safe. Warning: it will stay in memory unless you manually manage it or it gets dereferenced. Be extra cautious if it is global.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">static&lt;/span> &lt;span class="kd">let&lt;/span> &lt;span class="nv">someBigAsset&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">MegaClass&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="other-tips">Other tips
+&lt;/h2>&lt;blockquote>
+&lt;p>To add onto this, you can use the @autoclosure closure keyword instead of @escaping to give lazy-like tendencies to your closures. Auto closure means the closure won’t initialize or execute until it’s called, so it saves execution time. &lt;br>
+— &lt;cite>Josh Jaslow&lt;/cite>&lt;/p>&lt;/blockquote>
+&lt;p>&lt;em>Originally published 09/23/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #37</title><link>https://nathanbarta.com/p/swift-daily-37/</link><pubDate>Wed, 22 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-37/</guid><description>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Old Swift loop&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">i&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="n">i&lt;/span>&lt;span class="o">++&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Swift 3?+ loop&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="mf">0.&lt;/span>&lt;span class="p">.&amp;lt;&lt;/span>&lt;span class="mi">100&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Old range operator (this was from the beta of swift)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">someRange&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mf">1.&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">10&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// New range operator&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">someRange&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mf">1.&lt;/span>&lt;span class="p">.&amp;lt;&lt;/span>&lt;span class="mi">10&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 09/22/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #35</title><link>https://nathanbarta.com/p/swift-daily-35/</link><pubDate>Mon, 20 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-35/</guid><description>&lt;p>Bitwise operators in Swift exist, and are just like bitwise operators in C, except that they will error on overflow. However, you can disable overflow errors with these special operators:&lt;/p>
+&lt;p>Overflow addition (&amp;amp;+) Overflow subtraction (&amp;amp;-) Overflow multiplication (&amp;amp;*)&lt;/p>
+&lt;p>You can also define your own operators such as a logical shift “&amp;gt;&amp;gt;&amp;gt;”.&lt;/p>
+&lt;p>&lt;em>Originally published 09/20/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #34</title><link>https://nathanbarta.com/p/swift-daily-34/</link><pubDate>Sun, 19 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-34/</guid><description>&lt;h2 id="working-with-codable-dates">Working with codable dates
+&lt;/h2>&lt;p>There are many ways to represent a date in CS. With codable, you can code and convert date representations to match the Date() type in swift.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//Decoding example. Convert an ISO8601 to Date()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">decoder&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">JSONDecoder&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">decoder&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">dateDecodingStrategy&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">iso8601&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//Custom: You can also decode from a custom date format using DateFormatter().&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">decoder&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">dateDecodingStrategy&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">formatted&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">someCustomDateFormatter&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//You can also decode with a closure&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">decoder&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">dateDecodingStrategy&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">custom&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">decoder&lt;/span> &lt;span class="k">in&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="p">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 09/19/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #33</title><link>https://nathanbarta.com/p/swift-daily-33/</link><pubDate>Sat, 18 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-33/</guid><description>&lt;p>It is possible to make a custom keyDecodingStrategy. However, I think it is not worth the effort since working with strings in Swift is the most annoying thing ever. You might as well hardcode everything like in day #31 at that point - it’ll make your app faster.&lt;/p>
+&lt;p>See here for example implementation: &lt;a class="link" href="https://martiancraft.com/blog/2018/08/Implementing-custom-key-strategy-for-coding-types/" target="_blank" rel="noopener"
+>https://martiancraft.com/blog/2018/08/Implementing-custom-key-strategy-for-coding-types/&lt;/a>&lt;/p>
+&lt;p>&lt;em>Originally published 09/18/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #32</title><link>https://nathanbarta.com/p/swift-daily-32/</link><pubDate>Fri, 17 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-32/</guid><description>&lt;p>If you just have a 1:1 conversion like snake_case-&amp;gt;camelCase, you do not need to do what was described in day #31, instead you can use built in decoding strategies.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">decoder&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">JSONDecoder&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">decoder&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">keyDecodingStrategy&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">convertFromSnakeCase&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There are options for DefaultKeys, SnakeCase, and Custom. This technique comes with a performance cost, but is great for prototyping.&lt;/p>
+&lt;p>&lt;em>Originally published 09/17/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #31</title><link>https://nathanbarta.com/p/swift-daily-31/</link><pubDate>Thu, 16 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-31/</guid><description>&lt;p>Data coming from (or going to) an API is not always organized/standardized. For instance, the json keys could have different naming schemes. Consider the case below:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">first_name:&lt;/span> &lt;span class="nt">&amp;#34;&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">MiddleName&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="err">lastName:&lt;/span> &lt;span class="nt">&amp;#34;&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>So how does this get coded? By using a feature called codingkeys. Simply create an enum inside the object you are decoding to as following:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">struct&lt;/span> &lt;span class="nc">Name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Codable&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nv">firstName&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">String&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nv">middleName&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">String&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nv">lastName&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">String&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">enum&lt;/span> &lt;span class="nc">CodingKeys&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">String&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">CodingKey&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">firstName&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s">&amp;#34;first_name&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">middleName&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s">&amp;#34;MiddleName&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">lastName&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="s">&amp;#34;lastName&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This codingkeys enum will allow the codable object to map to the json keys.&lt;/p>
+&lt;p>&lt;em>Originally published 09/16/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #30</title><link>https://nathanbarta.com/p/swift-daily-30/</link><pubDate>Wed, 15 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-30/</guid><description>&lt;p>Well, first things first, compile it. Putting your code in a playground/REPL is not going to give you accurate results. The best way to test your code is with testing frameworks. You can test sections of pure swift easily with attabench &lt;a class="link" href="https://swiftrocks.com/benchmarking-swift-code-properly-with-attabench" target="_blank" rel="noopener"
+>https://swiftrocks.com/benchmarking-swift-code-properly-with-attabench&lt;/a>. Xcode of course comes with it’s own profiling tools (called instruments) for testing things such as launchtime, time, leaks, memory usage, battery usage, network/file usage, and much more - which is applicable to full scale application testing.&lt;/p>
+&lt;p>&lt;em>Originally published 09/15/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #29</title><link>https://nathanbarta.com/p/swift-daily-29/</link><pubDate>Tue, 14 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-29/</guid><description>&lt;p>&lt;a class="link" href="https://haslab.github.io/SAFER/scp21.pdf" target="_blank" rel="noopener"
+>Swift consumes 2.79x energy than C Swift takes 4.2x longer than C Swift uses 2.71x more memory than C&lt;/a>&lt;/p>
+&lt;p>Overall, these are some great numbers for a language with so many features.&lt;/p>
+&lt;p>&lt;em>Originally published 09/14/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #28</title><link>https://nathanbarta.com/p/swift-daily-28/</link><pubDate>Mon, 13 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-28/</guid><description>&lt;p>If your API is HTTP only, there is nothing you have to do. However, if you are using a self-signed certificate for HTTPS (testing purposes of course), there are extra things to do. iOS apps will not trust self-signed certs.&lt;/p>
+&lt;h2 id="method-1-force-trust-not-recommended">Method 1: Force Trust (not recommended)
+&lt;/h2>&lt;ol>
+&lt;li>Add key “Allow Arbitrary Loads : YES” to “App Transport Security Settings” in info.plist&lt;/li>
+&lt;li>Wherever you are making the https calls, conform the class to URLSessionDelegate and add&lt;/li>
+&lt;/ol>
+&lt;h2 id="method-2-install-the-cert-to-the-device-recommended">Method 2: Install the cert to the device (recommended)
+&lt;/h2>&lt;p>You can simply transfer the cert file to the device, and then configure it in settings. &lt;a class="link" href="https://medium.com/collaborne-engineering/self-signed-certificates-in-ios-apps-ff489bf8b96e" target="_blank" rel="noopener"
+>https://medium.com/collaborne-engineering/self-signed-certificates-in-ios-apps-ff489bf8b96e&lt;/a> &lt;a class="link" href="https://developer.apple.com/library/archive/qa/qa1948/_index.html" target="_blank" rel="noopener"
+>https://developer.apple.com/library/archive/qa/qa1948/_index.html&lt;/a>&lt;/p>
+&lt;h2 id="notes">Notes
+&lt;/h2>&lt;p>If you leave test code from Method 1 in your app, it is likely that your app will not be accepted bc it’s a security flaw. Using compiler directives to distinguish between test and build versions could be useful, but you still might get rejected. There are more complicated setups out there, but you won’t probably use them unless you work at a big company.&lt;/p>
+&lt;p>&lt;em>Originally published 09/13/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #27</title><link>https://nathanbarta.com/p/swift-daily-27/</link><pubDate>Sun, 12 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-27/</guid><description>&lt;p>Xcode documentation is really fun! You can tag functions with comments, which are then presented nicely when you OPT+Click the function in context. Here is an example on a data structure. There are tons of tags you can use, see more at &lt;a class="link" href="https://nshipster.com/swift-documentation/" target="_blank" rel="noopener"
+>https://nshipster.com/swift-documentation/&lt;/a>&lt;/p>
+&lt;p>&lt;img src="https://nathanbarta.com/p/swift-daily-27/code_example.png"
+width="1024"
+height="66"
+srcset="https://nathanbarta.com/p/swift-daily-27/code_example_hu_c7849edbb35a28a7.png 480w, https://nathanbarta.com/p/swift-daily-27/code_example_hu_b6ba4e4ef91654ec.png 1024w"
+loading="lazy"
+alt="in-code example"
+class="gallery-image"
+data-flex-grow="1551"
+data-flex-basis="3723px"
+>&lt;/p>
+&lt;p>&lt;img src="https://nathanbarta.com/p/swift-daily-27/xcode_example.png"
+width="1024"
+height="713"
+srcset="https://nathanbarta.com/p/swift-daily-27/xcode_example_hu_72235377b550c36b.png 480w, https://nathanbarta.com/p/swift-daily-27/xcode_example_hu_35d04b2326b1b80f.png 1024w"
+loading="lazy"
+alt="xcode example"
+class="gallery-image"
+data-flex-grow="143"
+data-flex-basis="344px"
+>&lt;/p>
+&lt;h2 id="other-tips">Other tips
+&lt;/h2>&lt;blockquote>
+&lt;p>Pressing CMD+OPT+&amp;quot;/&amp;quot; will auto generate a skeleton. &lt;br>
+— &lt;cite>Josh Jaslow&lt;/cite>&lt;/p>&lt;/blockquote>
+&lt;p>&lt;em>Originally published 09/12/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #26</title><link>https://nathanbarta.com/p/swift-daily-26/</link><pubDate>Sat, 11 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-26/</guid><description>&lt;p>Swift has “where” clauses that allow you to put logic in loop statements and extensions&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">list&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="nb">Array&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mf">0.&lt;/span>&lt;span class="p">..&lt;/span>&lt;span class="mi">100&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="n">list&lt;/span> &lt;span class="k">where&lt;/span> &lt;span class="n">x&lt;/span> &lt;span class="o">&amp;lt;&lt;/span> &lt;span class="mi">50&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="bp">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">x&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// For an example with extensions, see day #10!&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 09/11/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #25</title><link>https://nathanbarta.com/p/swift-daily-25/</link><pubDate>Fri, 10 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-25/</guid><description>&lt;p>It is possible to make a linked list in 4 lines of code in Swift (but just because you can do something doesn’t mean you should)&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kr">indirect&lt;/span> &lt;span class="kd">enum&lt;/span> &lt;span class="nc">LinkedListNode&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">T&lt;/span>&lt;span class="p">&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">value&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">T&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">T&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">next&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">LinkedListNode&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">switch&lt;/span> &lt;span class="n">currentNode&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nv">value&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="bp">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="n">next&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nv">value&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kd">let&lt;/span> &lt;span class="nv">next&lt;/span>&lt;span class="p">):&lt;/span> &lt;span class="bp">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">value&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="n">currentNode&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">next&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 09/10/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #24</title><link>https://nathanbarta.com/p/swift-daily-24/</link><pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-24/</guid><description>&lt;p>Derived data is stored at /Users/YourNameHere/Library/Developer/Xcode/DerivedData&lt;/p>
+&lt;p>At a basic level, it will cache build information for your projects, but let’s see what it actually stores.&lt;/p>
+&lt;ul>
+&lt;li>Precompiled module files. These files are an abstraction to reading in headers every time you import something in code. These files will be under a folder with a hash as a name. The hash takes in clang arguments as input.&lt;/li>
+&lt;li>Index folder: You may have seen an indicator saying Indexing in progress&amp;hellip; in Xcode. Basically, indexing is creating a quick way to search though your project. Xcode manages searching and find/replace stuff very nicely.&lt;/li>
+&lt;li>Logs: Just a history of builds/testbuilds etc…&lt;/li>
+&lt;li>Builds: The actual builds are saved. If you don’t change your code between runs, Xcode will just use the last stored build.&lt;/li>
+&lt;li>Intermediates: Other files that need to be build for the project. These normally include libraries and frameworks. The great part about this section is that many of the files here don’t get modified too much, so the cache is very pure (is that a legit term to describe caches? Idk).&lt;/li>
+&lt;/ul>
+&lt;p>If you’ve ever had weird problems with xcode, you’re probably familiar with the delete derived data trick. I don’t know why problems arise here, or why deleting derived data works, but I hypothesize that it has something to do with cache invalidation bc that kind of stuff gets extremely hard at the low level.&lt;/p>
+&lt;p>Here’s a quick tip for all the avid Xcode users out there: Navigate to DerivedData and create an alias. Put that alias in your desktop folder. Tada! You now have a less annoying way of accessing DerivedData when you need to.&lt;/p>
+&lt;p>&lt;em>Information for this post was sourced from the article linked below&lt;/em>&lt;/p>
+&lt;p>&lt;em>Originally published 09/09/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #22</title><link>https://nathanbarta.com/p/swift-daily-22/</link><pubDate>Sat, 24 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-22/</guid><description>&lt;p>SPM problems.&lt;/p>
+&lt;ol>
+&lt;li>Errors are very hard to decode: You do not get a lot of info from the error logs.&lt;/li>
+&lt;li>Hard to get complete information: There are no good all encompassing guides.&lt;/li>
+&lt;li>Stuff gets outdated very frequently: You will sometimes have to download someone else’s code manually just to change the shebang at the top of their package file “// swift-tools-version:5.3”&lt;/li>
+&lt;li>Super complicated&lt;/li>
+&lt;li>File structure not always obvious&lt;/li>
+&lt;li>It becomes really hard to do more advanced things like link libraries&lt;/li>
+&lt;li>There are a whole lot of linking technicalities that SPM obscures, static vs dynamic, XCworkspace vs xcodeproj, ect…&lt;/li>
+&lt;/ol>
+&lt;p>&lt;em>Originally published 04/24/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #21</title><link>https://nathanbarta.com/p/swift-daily-21/</link><pubDate>Fri, 23 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-21/</guid><description>&lt;p>Here is what a package file looks like. You may note that it looks similar to JSON.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// swift-tools-version:5.3 //&amp;lt;- This comment is necessary, it specifies tool version&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">import&lt;/span> &lt;span class="nc">PackageDescription&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">package&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">Package&lt;/span>&lt;span class="p">(&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;MyLibrary&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">platforms&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">macOS&lt;/span>&lt;span class="p">(.&lt;/span>&lt;span class="n">v10_15&lt;/span>&lt;span class="p">),&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">products&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">library&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;MyLibrary&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">targets&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s">&amp;#34;MyLibrary&amp;#34;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="c1">//Here is where you can define products. They can be libraries or executables&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dependencies&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">package&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="err">“&lt;/span>&lt;span class="n">Utility&lt;/span>&lt;span class="err">”&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">url&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;https://github.com/user/repo.git&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">from&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;1.0.0&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">//Import the latest version &amp;gt;1.0.0. Alternatively, you can use .exact(“1.0.0”) to get an exact version. There are also ranges and such. If there are multiple packages, SPM will try to get the most up to date combination where all dependencies work with eachother.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">targets&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">target&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;MyLibrary&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dependencies&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s">&amp;#34;Utility&amp;#34;&lt;/span>&lt;span class="p">]),&lt;/span> &lt;span class="c1">//Targets, basically what you would run.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">.&lt;/span>&lt;span class="n">testTarget&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;MyLibraryTests&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">dependencies&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s">&amp;#34;MyLibrary&amp;#34;&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//There are way more features you can take advantage of.&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 04/23/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #20</title><link>https://nathanbarta.com/p/swift-daily-20/</link><pubDate>Thu, 22 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-20/</guid><description>&lt;p>Ok, I’ve mentioned SwiftPM or SPM multiple times now - but what is it?&lt;/p>
+&lt;p>SwiftPM is a built-in dependency manager for Swift code. SwiftPM allows users to create, distribute, download, and link modules. Modules can either be libraries, or executables.&lt;/p>
+&lt;p>Here is the basic file structure of a module:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ModuleName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">├── Sources
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ └── ModuleName
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── File1.swift
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">│ ├── File2.swift
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">└── Package.swift
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>The Package.swift file is the most important part, as it organizes the module.&lt;/p>
+&lt;p>&lt;em>Originally published 04/22/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #19</title><link>https://nathanbarta.com/p/swift-daily-19/</link><pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-19/</guid><description>&lt;p>Swift has a style guide! It is especially useful if you are an experienced programmer picking up the language, because Swift has certain features that you will likely not know how to style.&lt;/p>
+&lt;p>&lt;em>Originally published 04/21/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/09/2022.&lt;/em>&lt;/p></description></item><item><title>Day #18</title><link>https://nathanbarta.com/p/swift-daily-18/</link><pubDate>Tue, 20 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-18/</guid><description>&lt;p>Swift was originally codenamed “Shiny,” a reference to a catchphrase used in the TV show Firefly.&lt;/p>
+&lt;p>About 3 months before the language launched, it was named Swift.&lt;/p>
+&lt;p>&lt;em>Originally published 04/20/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #17</title><link>https://nathanbarta.com/p/swift-daily-17/</link><pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-17/</guid><description>&lt;p>Structs, as long as they are comprised of less than or equal to 3 words, who’s words are primitive or first-class, are generally performant, as long as they do not implement a protocol. This is because they reside in the stack instead of the heap, have no references (although a struct requires reference counting if its properties require it), and are statically managed. To make data fields first class, you can abstract them with other types, such as an enum which implements String, or Hashable. Swift arrays can also store structs directly, instead of using references - which can be EXTREMELY useful (consider an array of type “points” comprising a mesh/graph).&lt;/p>
+&lt;p>Classes are generally performant too, as long as you keep the references down, and try to make them statically called by declaring them “final”. Marking data fields as “final” is also very performant, as it eliminates compiler-side getter setter override checks. Marking functions as private can have the same effect. Giving the compiler more information, such as the module hierarchy (Enable “Whole Module Optimization”), will lead to automatic optimization, because it will check classes for sub-classes and such. This is one of the reasons that Swift is faster than obj-c.&lt;/p>
+&lt;p>&lt;em>Originally published 04/19/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #16</title><link>https://nathanbarta.com/p/swift-daily-16/</link><pubDate>Sun, 18 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-16/</guid><description>&lt;h2 id="classes">Classes
+&lt;/h2>&lt;p>Swift classes are reference types. This means if you assign a class to a field, you are passing a reference around. In order to copy a class, you will have to make a shallow or deep copy.&lt;/p>
+&lt;h2 id="structs">Structs
+&lt;/h2>&lt;p>Swift structs are value types. This means if you are passing a copy around. Every time you move a struct, you create a new copy of the struct.&lt;/p>
+&lt;h2 id="why">Why?
+&lt;/h2>&lt;p>First thing to note is that Structs are not unique to Swift. They are present in many languages, such as C, C#, C++, golang. Some languages implement structs as derivatives of other data structures, and some langagues do not have them at all (java, python). Structs are generally more performant if used right - which is a distinct advantage. However, the biggest advantage is probably just the differences in copying versus referencing. Structs help you move your code towards a more data-oriented approach.&lt;/p>
+&lt;p>&lt;em>Originally published 04/18/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #15</title><link>https://nathanbarta.com/p/swift-daily-15/</link><pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-15/</guid><description>&lt;p>Computed properties are variables that compute when they are called&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//Example&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nv">tempFahrenheit&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Int&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="mi">90&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">tempCelsius&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Int&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="mi">32&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="n">tempFahrenheit&lt;/span> &lt;span class="err">−&lt;/span> &lt;span class="mi">32&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="err">×&lt;/span> &lt;span class="mi">5&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="mi">9&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>They are useful for disposable resources.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//Here is an example that i’ve seen in the wild. It just converts ints into other types. &lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">extension&lt;/span> &lt;span class="nc">Int&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">g&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">CGFloat&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="n">CGFloat&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">d&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Double&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nb">Double&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">f&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Float&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nb">Float&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">b&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Int8&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nb">Int8&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">ub&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">UInt8&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nb">UInt8&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">s&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Int16&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nb">Int16&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">us&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">UInt16&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nb">UInt16&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">i&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Int32&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nb">Int32&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">ui&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">UInt32&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nb">UInt32&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">ul&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">UInt&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nb">UInt&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">ll&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Int64&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nb">Int64&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">ull&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">UInt64&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="nb">UInt64&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Computed properties do not have to be used for code organization. They are also great for dealing with values that are constantly changing.&lt;/p>
+&lt;p>&lt;em>Originally published 04/17/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #14</title><link>https://nathanbarta.com/p/swift-daily-14/</link><pubDate>Fri, 16 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-14/</guid><description>&lt;p>Swift has variadic parameters. This allows you to put multiple things into a function without having to use an array. It is notated with the range syntax “…”&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//EXAMPLE FROM https://www.swiftbysundell.com/tips/the-power-of-variadic-parameters/&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// When using a variadic parameter, any number of arguments can&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// be passed, and the compiler will automatically organize them&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// into an array.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">_&lt;/span> &lt;span class="n">message&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Message&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">attaching&lt;/span> &lt;span class="n">attachments&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Attachment&lt;/span>&lt;span class="p">...)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Passing no variadic arguments:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Passing either a single, or multiple variadic arguments:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">attaching&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">attaching&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">image&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">document&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>You always have the option of using an array if you want, like:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="n">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">message&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">attaching&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="err">…&lt;/span>&lt;span class="p">])&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 04/16/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #13</title><link>https://nathanbarta.com/p/swift-daily-13/</link><pubDate>Thu, 15 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-13/</guid><description>&lt;p>A &lt;em>guard&lt;/em> statement is basically a reverse &lt;em>if&lt;/em> statement&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="k">guard&lt;/span> &lt;span class="n">textField&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="p">!&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="err">“”&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">exit&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="c1">//If the condition is true, the program will continue. Kind of like a safe “assert()”&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//Guard statements can also be used to unwrap optionals&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">guard&lt;/span> &lt;span class="kd">let&lt;/span> &lt;span class="nv">entry&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">someEntryField&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">entry&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="n">presentWarning&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">“&lt;/span>&lt;span class="n">You&lt;/span> &lt;span class="n">have&lt;/span> &lt;span class="n">not&lt;/span> &lt;span class="n">entered&lt;/span> &lt;span class="n">anything&lt;/span>&lt;span class="err">”&lt;/span>&lt;span class="p">);&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h1 id="why-do-these-even-exist">Why do these even exist?
+&lt;/h1>&lt;p>First of all, they make your code prettier. They can flatten some code structures like &lt;em>pyramids of validation&lt;/em>. It takes less effort to read “guard” and know what it means instead of “if !() {}”. Secondly, it introduces a method of unwrapping an optional and placing it in the active scope, instead of inside a body like an “if let” statement.&lt;/p>
+&lt;p>&lt;em>Originally published 04/15/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #12</title><link>https://nathanbarta.com/p/swift-daily-12/</link><pubDate>Wed, 14 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-12/</guid><description>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="err">…&lt;/span>&lt;span class="mi">3&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="c1">//range&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="n">collection&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="c1">//over a collection&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="k">in&lt;/span> &lt;span class="bp">stride&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">…&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="c1">//striding&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">while&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="c1">//while&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">repeat&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="k">while&lt;/span> &lt;span class="p">()&lt;/span> &lt;span class="c1">//Same thing, but condition is after body.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//Higher order solutions&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="n">forEach&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">.&lt;/span>&lt;span class="bp">map&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 04/14/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #11</title><link>https://nathanbarta.com/p/swift-daily-11/</link><pubDate>Tue, 13 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-11/</guid><description>&lt;p>Type aliasing is a way of giving a type a different name. It is useful for type-safe code organization, and cosmetics.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">typealias&lt;/span> &lt;span class="n">Credit&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="nb">Int&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">struct&lt;/span> &lt;span class="nc">Course&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nv">credits&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Credit&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 04/13/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #10</title><link>https://nathanbarta.com/p/swift-daily-10/</link><pubDate>Mon, 12 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-10/</guid><description>&lt;p>Swift extensions are probably one of the most powerful features of the language.&lt;/p>
+&lt;p>You can place extra code in extensions and it will be as if the code was in the entity itself.&lt;/p>
+&lt;p>In short: “Extension methods are a special kind of static method, but they are called as if they were instance methods on the extended type.”&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">class&lt;/span> &lt;span class="nc">Army&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">func&lt;/span> &lt;span class="nf">giveCommand&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">command&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">String&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">-&amp;gt;&lt;/span> &lt;span class="n">CommandID&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">extension&lt;/span> &lt;span class="nc">Army&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">func&lt;/span> &lt;span class="nf">rescindCommand&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">id&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">CommandID&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">-&amp;gt;&lt;/span> &lt;span class="nb">Bool&lt;/span> &lt;span class="p">{}&lt;/span> &lt;span class="c1">//This code is as if it is in class Army&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//All arrays with type Army will now have a “deploy” functionality. This feature can be used in real scenarios like sorting ect…&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">extension&lt;/span> &lt;span class="nc">Array&lt;/span> &lt;span class="k">where&lt;/span> &lt;span class="n">Element&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">Army&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">func&lt;/span> &lt;span class="nf">deployAll&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 04/12/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #9</title><link>https://nathanbarta.com/p/swift-daily-9/</link><pubDate>Sun, 11 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-9/</guid><description>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="n">open&lt;/span> &lt;span class="kd">class&lt;/span> &lt;span class="nc">Book&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="c1">//An “open” class allows subclassing within a context outside of the defining module&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">private&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">String&lt;/span> &lt;span class="c1">//Restricts access to enclosing declaration. Extensions in same class file will be able to access.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">public&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">isbn&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">UUID&lt;/span> &lt;span class="c1">//Does not restrict access.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">fileprivate&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">genre&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">String&lt;/span> &lt;span class="c1">//Restricts access outside of the defining *file*. Classes within the same file will be able to access.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">internal&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">length&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Int&lt;/span> &lt;span class="c1">//Restrict access outside of the defining *module*.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Protected does not exist because:&lt;/p>
+&lt;ul>
+&lt;li>It is ambiguous as to whether an extension should be able to access it&lt;/li>
+&lt;li>Subclass methods could expose it anyway&lt;/li>
+&lt;/ul>
+&lt;p>All vars/classes/types/entities have a access level of internal by default.&lt;/p>
+&lt;p>Modifiers:&lt;/p>
+&lt;ul>
+&lt;li>If you give something the @testable attribute, it will be accessible by the testing classes, but maintain status as internal/private otherwise.&lt;/li>
+&lt;li>You can define access control to an entire class/struct. This will also carry through for all it’s members (properties, methods, initializers, and subscripts)&lt;/li>
+&lt;li>If you create a tuple out of two differently access controlled types, it will assume the most restrictive one.&lt;/li>
+&lt;li>A function will be as restrictive as it’s parameters or return types are, unless you specify.&lt;/li>
+&lt;li>Enum cases cannot have different levels of access, as well as their raw and associated values&lt;/li>
+&lt;li>Type aliases can only have the same access level, or a more restrictive one.* this is an oversimplification&lt;/li>
+&lt;/ul>
+&lt;p>&lt;em>Originally published 04/11/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #8</title><link>https://nathanbarta.com/p/swift-daily-8/</link><pubDate>Sat, 10 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-8/</guid><description>&lt;p>Associated values: You can store custom values in an enum.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">enum&lt;/span> &lt;span class="nc">Genre&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">fiction&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">scifi&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">nonFiction&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">history&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">science&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">medical&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">other&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">name&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">String&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">//&amp;lt;———&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Raw values: You can store raw values in an enum. This can be used to wrap a reference type like a String (see below) in a value type (enum).&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">enum&lt;/span> &lt;span class="nc">Routes&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">String&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">home&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="err">“&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">home&lt;/span>&lt;span class="err">”&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">about&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="err">“&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">about&lt;/span>&lt;span class="err">”&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">library&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="err">“&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">library&lt;/span>&lt;span class="err">”&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">case&lt;/span> &lt;span class="n">contact&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="err">“&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">contact&lt;/span>&lt;span class="err">”&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">homePath&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">URL&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">URL&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">“&lt;/span>&lt;span class="n">www&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">you&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">com&lt;/span>&lt;span class="err">”&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="n">Routes&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">home&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">rawValue&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There is so much more (recursive enums, putting methods inside enums, unwrapping enums, ..)! Enums can be used for so much more than just “options”. One cool thing I’ve seen enums used for before is controlling a C state machine.&lt;/p>
+&lt;p>&lt;em>Originally published 04/10/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #7</title><link>https://nathanbarta.com/p/swift-daily-7/</link><pubDate>Fri, 09 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-7/</guid><description>&lt;p>With a little (lot) of finagling, you can run C libraries from Swift, which opens the doors to higher performance and graphical/musical/computational applications.&lt;/p>
+&lt;p>The basic structure for importing a C library in Swift might look like this:&lt;/p>
+&lt;p>Compiled C library on system in users/lib or wherever it is default -&amp;gt; Make a module -&amp;gt; Import as system library with SwiftPM (SwiftPackageManager) into that module -&amp;gt; Make sure linker is working correctly -&amp;gt; Create modulemap file and Bridging header file (also sometimes called a shim) -&amp;gt; Configure these files -&amp;gt; Import this module into your project using SwiftPM.&lt;/p>
+&lt;p>It is very difficult since SwiftPM does not tell you what you are doing wrong, and there is not a lot of good help online.&lt;/p>
+&lt;p>&lt;em>Originally published 04/09/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #6</title><link>https://nathanbarta.com/p/swift-daily-6/</link><pubDate>Thu, 08 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-6/</guid><description>&lt;p>@IBAction &amp;amp; @IBOutlet: These are remnants of Obj-c, and pre-macOS10.3. Before Xcode existed, there was something called Project Builder. To create views for Project Builder, you had to use a separate application called Interface Builder, which made .nib files &amp;amp; the object graph. @IBOutlet and @IBAction were used as keywords to expose Project Builder code to Interface builder. Note that the “IB” in these keywords stands for Interface Builder.&lt;/p>
+&lt;p>These keywords do not actually have any meaning in a modern context, especially @IBAction, since any object from the Interface Builder (now included in Xcode) can be attached to any function matching this pattern: name(_ sender: ) -&amp;gt; Void.&lt;/p>
+&lt;p>@IBOutlet keyword however is still needed to link properties in the IB and code.&lt;/p>
+&lt;p>Property wrappers: Putting @propertywrapper before a class lets you create a type that has some functionality ever time it is changed. For example, you could make “@propertywrapper class Flipped{}”, and every data field with “@Flipped” before it would have it’s value flipped upon assignment. @Flipped var name: String name = “Nathan” print(name) //prints “nahtaN” Just like everything else in Swift, these can get insanely powerful.&lt;/p>
+&lt;p>Objc: Adding @objc will expose your Swift code to the Objective-C runtime. This is needed for some functionalities like UIGestureRecognizer, and other things still rooted in Obj-c.&lt;/p>
+&lt;p>Attributes: There is a whole class of Swift functionality based off of something called attributes. @objc is one of these attributes, as well as property wrappers. There are tons of these that perform all kinds of black magic, so I will just leave you with articles at the end of this post.&lt;/p>
+&lt;p>&lt;em>Originally published 04/08/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #5</title><link>https://nathanbarta.com/p/swift-daily-5/</link><pubDate>Wed, 07 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-5/</guid><description>&lt;p>The Protocol-delegate pattern is a method of subscribing methods to an event.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;span class="lnt">31
+&lt;/span>&lt;span class="lnt">32
+&lt;/span>&lt;span class="lnt">33
+&lt;/span>&lt;span class="lnt">34
+&lt;/span>&lt;span class="lnt">35
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">protocol&lt;/span> &lt;span class="nc">ButtonPressedDelegate&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">AnyObject&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">func&lt;/span> &lt;span class="nf">methodToBeImplemented&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">class&lt;/span> &lt;span class="nc">ReceivingClass&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">UIViewController&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">ButtonPressedDelegate&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">func&lt;/span> &lt;span class="nf">methodToBeImplemented&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="c1">//Conform to protocol&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="bp">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="err">“&lt;/span>&lt;span class="n">Button&lt;/span> &lt;span class="n">pressed&lt;/span>&lt;span class="err">”&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">class&lt;/span> &lt;span class="nc">SendingClass&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">UIViewController&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">weak&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">delegate&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">ButtonPressedDelegate&lt;/span>&lt;span class="p">?&lt;/span> &lt;span class="c1">//Create field for reference. Use “weak var” to avoid retain cycle.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kr">@IBAction&lt;/span> &lt;span class="kd">func&lt;/span> &lt;span class="nf">send&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">_&lt;/span> &lt;span class="n">sender&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Any&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">delegate&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">methodToBeImplemented&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1">//Call method&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">receivingC&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">ReceivingClass&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">sendingC&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">SendingClass&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sendingC&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">delegate&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">receivingC&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="kc">self&lt;/span> &lt;span class="c1">//Pass the reference. Normally you would not do it like this, but this is the concept.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//Better places to assign a reference:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//-From inside cellForRowAt()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//-In a segue&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//-As you instantiate sending class from receiving class&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//Common errors:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//-Protocols are one-to-one. If you are trying to subscribe multiple receivers, you will need to implement a multicast delegate. Dm for code snippet.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//-Forgetting to assign self to delegate field in sending class.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//-Issues with “weak self”, make sure to conform the protocol to AnyObject&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//For more code ideas, and a explanation an why we use “weak var”: https://medium.com/macoclock/delegate-retain-cycle-in-swift-4d9c813d0544&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 04/07/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #4</title><link>https://nathanbarta.com/p/swift-daily-4/</link><pubDate>Tue, 06 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-4/</guid><description>&lt;p>Optionals are notated by a “?” postfix. Some types are optional by default. If a type is optional, it either has a value, or is nil. There are a lot of things that are optionals, such as images and text fields. Optionals allow for more logical API’s&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">var&lt;/span> &lt;span class="nv">age&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="nb">Int&lt;/span>&lt;span class="p">?&lt;/span> &lt;span class="c1">//Custom optional. Since it is optional, it does not need to be instantiated inside a class. It can be assigned to later.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">image&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">UIImage&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">UIImage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">named&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="err">“&lt;/span>&lt;span class="n">profilePic&lt;/span>&lt;span class="err">”&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">//Type will be optional by default&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">textField&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">UITextField&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">UITextField&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1">//Type will be optional by default&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//Optional values have to be “un-wrapped” to be used, because something can’t both have a value and be nil.&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">//There are multiple ways to un-wrap an optional&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">////SAFE METHODS:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="kd">let&lt;/span> &lt;span class="nv">text&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">textField&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">text&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//“text” will be accessible inside here if it exists&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">guard&lt;/span> &lt;span class="kd">let&lt;/span> &lt;span class="nv">text&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">textField&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">text&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="k">return&lt;/span> &lt;span class="p">}&lt;/span> &lt;span class="c1">//text will be available following declaration&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">text&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">textField&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">text&lt;/span> &lt;span class="p">??&lt;/span> &lt;span class="err">“”&lt;/span> &lt;span class="c1">//If textField is nil, “” will be given as a default value&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">////UNSAFE METHODS:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nv">text&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">textField&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">text&lt;/span>&lt;span class="p">!&lt;/span> &lt;span class="c1">//This will crash if the optional is nil. You should only use this if you know the value will never be nil&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;em>Originally published 04/06/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #3</title><link>https://nathanbarta.com/p/swift-daily-3/</link><pubDate>Mon, 05 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-3/</guid><description>&lt;p>Swift is a great choice for web development due to the following features:&lt;/p>
+&lt;ul>
+&lt;li>Speed. Swift’s loops are lightning fast. Loops are very important for web-backends&lt;/li>
+&lt;li>Shared models. You can share a single data model file between your web app and mobile app (EX: DefaultUser.swift). This can cut down on development costs and time MASSIVELY. It’s also super clean and…&lt;/li>
+&lt;li>Expressive. Swift is super expressive. This is always an advantage.&lt;/li>
+&lt;/ul>
+&lt;p>Swift also has some disadvantages when it comes to web development:&lt;/p>
+&lt;ul>
+&lt;li>Lack of unified async functionality. Swift does not have default async functionality yet, although it is in the making. Currently, there are 3rd party solutions for promises and await. The “default” way of doing async in Swift is using closures as completion handlers. Swift’s async features when they arrive will be similar to GOlang’s.&lt;/li>
+&lt;li>Lack of information and adoption&lt;/li>
+&lt;/ul>
+&lt;p>Frameworks:&lt;/p>
+&lt;ul>
+&lt;li>Vapor: The most adopted Swift web framework. It is very fast and focuses on modular design. It is capable of making very complex apps. It is slightly bulky compared to other options. There is a good amount of information on it. I recommend &lt;a class="link" href="https://theswiftdev.com/practical-server-side-swift-using-vapor-4-book/" target="_blank" rel="noopener"
+>https://theswiftdev.com/practical-server-side-swift-using-vapor-4-book/&lt;/a> by Tibor Bödecs.&lt;/li>
+&lt;li>Perfect: This is the fastest web framework in the world*. It is very lightweight and does not have a lot of information on how to use. However, it should be pretty intuitive to use for people who are experienced. It is a refined framework, however I do not know if it will continue to be maintained.&lt;/li>
+&lt;li>Kitura: Mostly discontinued. It was supported by Microsoft for awhile, but lost the battle against Vapor. Kitura is still usable. It has a low memory footprint, good documentation, and still fulfills it’s purpose of working well on the cloud.&lt;/li>
+&lt;/ul>
+&lt;p>*tied with pretty much every other advanced web framework. It’s all really subjective.&lt;/p>
+&lt;p>&lt;em>Originally published 04/05/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #2</title><link>https://nathanbarta.com/p/swift-daily-2/</link><pubDate>Sun, 04 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-2/</guid><description>&lt;ol>
+&lt;li>You will need a developer account:
+&lt;ul>
+&lt;li>To get an individual’s developer account you will need basic information like your name and address.&lt;/li>
+&lt;li>If you are trying to get a business account, you will need a website, ADUNS number, and an individual with binding authority (probably you) to administer the account. An ADUNS number can be obtained by filling out a form on Apple’s website. Although, when I did it the form was broken. ADUNS is a subset of a DUNS number which is basically a certification given by a company called d&amp;amp;b that certifies the company as legitimate. This number will actually allow you to take federal funds if you ever win a contract, which is kind of cool.&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>You will need to manage signing certificates. These are basically permissions and security certificates. This step can be pretty hard.&lt;/li>
+&lt;li>Preparing submission to the store. This process is very tedious, as you have to check a whole lot of boxes, write descriptions, keywords, create art and app icons.&lt;/li>
+&lt;li>Signing legal agreements. Basically you just have to accept the banking contracts so Apple knows where to send your revenues. There are also developer programs you may be interested in enrolling in, such as reduced fees for developers making &amp;lt;1m (thanks Fortnite). If your app uses encryption or HTTPS requests or other stuff you may be required to sign more agreements.&lt;/li>
+&lt;li>Submit to store. You will have to build your code, and upload it. Then, you can send it off for review. In the past code review has taken 1-2 weeks, but lately I have gotten my code reviewed in less than an hour (shoutout to the guy who reviewed my code &amp;lt;1h before his Christmas break).&lt;/li>
+&lt;/ol>
+&lt;p>&lt;em>Originally published 04/04/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item><item><title>Day #1</title><link>https://nathanbarta.com/p/swift-daily-1/</link><pubDate>Sat, 03 Apr 2021 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/swift-daily-1/</guid><description>&lt;p>The Foundation framework is an Obj-C framework part of Swift’s core libraries. It is the root of all NSObject types. Foundation is closed source.&lt;/p>
+&lt;p>The Core Foundation (CF) framework is a lower level C implemented library part of Swift’s core libraries. It is the root of all CF types. CF objects must have their memory managed manually. CF does not need a Obj-C runtime. CF is open source.&lt;/p>
+&lt;p>The difference between these two frameworks is mostly that CF has a very limited Object model (it is C based after all). On the backend, foundation and CF can convert between each other toll-free.&lt;/p>
+&lt;p>Darwin is a bridge to commonly used C functions. It is a superset of CoreFoundation &amp;amp; Foundation. Here is an example of how it might be used with compiler directives for system specific code:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#if&lt;/span> &lt;span class="cp">os&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="cp">macOS&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">||&lt;/span> &lt;span class="cp">os&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="cp">iOS&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">import&lt;/span> &lt;span class="nc">Darwin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#elseif&lt;/span> &lt;span class="cp">os&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="cp">Linux&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">import&lt;/span> &lt;span class="nc">Glibc&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">#endif&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>There is also Swift standard library, which provides basic types like Strings.&lt;/p>
+&lt;p>&lt;em>Originally published 04/03/2021 &lt;a class="link" href="https://pittcsc.org/" target="_blank" rel="noopener"
+>https://pittcsc.org/&lt;/a>, republished 09/08/2022.&lt;/em>&lt;/p></description></item></channel></rss>

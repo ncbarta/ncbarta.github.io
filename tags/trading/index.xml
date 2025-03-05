@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Trading on Nathan Barta</title><link>https://nathanbarta.com/tags/trading/</link><description>Recent content in Trading on Nathan Barta</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 21 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://nathanbarta.com/tags/trading/index.xml" rel="self" type="application/rss+xml"/><item><title>HackNC 2022</title><link>https://nathanbarta.com/p/hacknc2022/</link><pubDate>Mon, 21 Nov 2022 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/hacknc2022/</guid><description>&lt;h1 id="hacknc2022">HACKNC2022
+&lt;/h1>&lt;p>A few weeks ago I had the chance to participate in HackNC 2022. I chose the financial track.&lt;/p>
+&lt;h2 id="what-i-built">What I built
+&lt;/h2>&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/ZX0DjC1lMqA"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;p>Tempest is a manager for trading algorithms. Basically, it is an abstraction between the systems for placing orders on the exchange, and your trading algorithms. I made this because when I used to run trading bots, it was very annoying to manage them. With Tempest you can write trading algorithms in whatever language you want &amp;amp; not worry about how their signals get turned into trades. In the future it would be awesome for Tempest to also manage deployment.&lt;/p>
+&lt;p>Unfortunately, I was not able to finish all that I wanted, but I learned a ton along the way, such as: gRPC, interprocess communication, protobuf.&lt;/p>
+&lt;p>Narrowly avoided FTX going out of business and ruining the Exchange~Tempest part of my project.&lt;/p></description></item></channel></rss>

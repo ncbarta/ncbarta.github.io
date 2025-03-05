@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Compression on Nathan Barta</title><link>https://nathanbarta.com/tags/compression/</link><description>Recent content in Compression on Nathan Barta</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 09 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://nathanbarta.com/tags/compression/index.xml" rel="self" type="application/rss+xml"/><item><title>Notes on AVVideo Compression</title><link>https://nathanbarta.com/p/notes-avvideo-compression/</link><pubDate>Mon, 09 Jan 2023 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/notes-avvideo-compression/</guid><description>&lt;p>&lt;em>this post is a work in progress (~50% done) &amp;amp; may not be completely factual&lt;/em>&lt;/p>
+&lt;h1 id="notes-on-avvideo-compression">Notes on AVVideo Compression
+&lt;/h1>&lt;p>Recently I was tasked with fixing and adding new features to a video pipeline. Our app was supposed to record the user and save a compressed file to remote storage, however, our video files were getting corrupted. This post has some helpful information about Apple’s video encoding APIs. Not all information is 100% tested or factual - there is some speculation &amp;amp; I am not super knowledgable about this topic.&lt;/p>
+&lt;h2 id="compression-considerations">Compression Considerations
+&lt;/h2>&lt;p>Modern compression algorithms take into account spacial (intra-) and temporal (inter-) compression. Spacial compression is similar to text compression, it tries to compress pixels within a frame into the smallest form factor. Temporal compression stores the difference between frames, which means areas of video that don’t change much get stored much more compactly.&lt;/p>
+&lt;p>Two of the most common codecs are H264 and H265 (HEVC). They can both technically encode lossless, but the majority of users, including me, choose lossy settings. HEVC can store the same quality video in about 50% of the space as H264, however there are compatibility issues in browsers, so you should evaluate who’s going to be watching your videos, and what capabilities exist. I chose to offer configurations for both codecs. Our videos are stored in mp4 containers with no audio.&lt;/p>
+&lt;h2 id="compression-terms">Compression terms
+&lt;/h2>&lt;h3 id="bit-rate">Bit Rate
+&lt;/h3>&lt;p>Bit rate is the number of bits required to represent one second of video. In our case, one of our configurations was for HD (1080x720) @ 60fps, with a pixel format of 32_BGRA. This means, uncompressed, our video takes about 1080x720x32x60 = 1,492,992,000 (1492.992 mbit/s, ~1.5 Gbit/s). Since the average upload speed is currently ~23 Mbps (&lt;a class="link" href="https://www.speedtest.net/global-index/united-states#fixed%29" target="_blank" rel="noopener"
+>https://www.speedtest.net/global-index/united-states#fixed)&lt;/a>, it would take ~65sec to send 1 second of video &amp;amp; a single 26 second video would cost almost 5GB of storage.&lt;/p>
+&lt;p>For this reason, we select a bit rate far lower than what’s needed for uncompressed video.&lt;/p>
+&lt;p>Bit Rate = # of pixels * FPS * BPP&lt;/p>
+&lt;h3 id="bits-per-pixel-bpp">Bits per pixel (BPP)
+&lt;/h3>&lt;p>The number of bits to encode a pixel. 3 is considered “visually lossless”, which is a far cry from the 32 we were using in the above example. Selecting a number between 0.05 and 0.1 will have very noticeable differences. Numbers between 0.1 and 3 will usually have diminishing returns.&lt;/p>
+&lt;p>Multiplying the bit rate by 0.131072 can give you a loose estimate for the MAX number of MB/s your video will consume.&lt;/p>
+&lt;h3 id="keyframes-i-frames">Keyframes (I-Frames)
+&lt;/h3>&lt;p>There are multiple types of frames in a video. Keyframes are just a picture. If you were to have all keyframes, the video would only use spacial compression.&lt;/p>
+&lt;h3 id="p-frames-and-b-frames">P-Frames and B-Frames
+&lt;/h3>&lt;p>These frames are what makes temporal compression work. They represent the differences between frames &amp;amp; are placed between two keyframes.&lt;/p>
+&lt;h3 id="group-of-pictures-gop">Group of Pictures (GOP)
+&lt;/h3>&lt;p>Distance between two keyframes. I-Frames sandwich a group of P-Frames and B-Frames.&lt;/p>
+&lt;h2 id="avvideocompressionpropertieskey">AVVideoCompressionPropertiesKey
+&lt;/h2>&lt;p>This section has descriptions of what the basic AVVideoCompressionPropertiesKey’s do, as well as some VideoToolbox keys.&lt;/p>
+&lt;p>In my understanding, these settings are often seen as a “suggestion” to the encoder &amp;amp; may not always be followed as expected.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Considerations&lt;/th>
+&lt;th>Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>AVVideoAverageBitRateKey&lt;/td>
+&lt;td>The average bit rate that the encoder will shoot for.&lt;/td>
+&lt;td>If this value is set too low &amp;amp; the encoder has no other options to degrade video quality to fit the bitrate target, the encoder will &lt;em>fail&lt;/em> and spit out a corrupt file. Give the encoder options, such as droppable frames, wider max GOP, wider QP (image quality) range. If the encoder is not struggling to fit into the bit rate, it will take up it’s space &amp;amp; return the highest quality video it can.&lt;/td>
+&lt;td>Documentation falsely states that this property only applies to H264.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>AVVideoExpectedSourceFrameRateKey&lt;/td>
+&lt;td>The frame rate of the input device connected to the AVCaptureSession.&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>AVCaptureSession has basic presets available statically within code, however, there are additional device presets available during runtime (AVCaptureDevice.Format).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>AVVideoMaxKeyFrameIntervalKey&lt;/td>
+&lt;td>Keyframe interval, aka GOP. 1 = 1th = every frame is a keyframe, 2 = 2nd = every other frame is a keyframe, 3 = 3rd = every third frame is a keyframe, etc…&lt;/td>
+&lt;td>Having all keyframes restricts the encoder to spacial compression only. This is MAX key frame interval. If you have extra space in the bitrate, the encoder will pick a smaller GOP (if a large GOP is a limiting factor to your video quality.) Setting the GOP too small can lead to blurry video because if the encoder is in a crunch, it will degrade QP.&lt;/td>
+&lt;td>Most encoders use a GOP length of 1-2 seconds, aka 30-60 frames @ 30fps, or 60-120 fps @60fps. &lt;a class="link" href="https://openradar.appspot.com/FB7528508" target="_blank" rel="noopener"
+>Default settings may differ in H264 &amp;amp; HEVC&lt;/a>. Documentation falsely states that this property only applies to H264.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>

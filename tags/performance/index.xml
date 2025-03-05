@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Performance on Nathan Barta</title><link>https://nathanbarta.com/tags/performance/</link><description>Recent content in Performance on Nathan Barta</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Tue, 20 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://nathanbarta.com/tags/performance/index.xml" rel="self" type="application/rss+xml"/><item><title>Maxing out MapKit: Optimizing map views for high performance</title><link>https://nathanbarta.com/p/maxing-out-mapkit/</link><pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/maxing-out-mapkit/</guid><description>&lt;p>All changes require minimal code changes and boost performance substantially. This is not a tutorial on how to use a map view.&lt;/p>
+&lt;h2 id="dequeue">Dequeue
+&lt;/h2>&lt;p>If you are looking at this blog, there is a high chance you already know the following optimization.&lt;/p>
+&lt;p>Map Views are set up very similarly to Table Views from an interface perspective. Developers should make sure they dequeue MKMapAnnotations.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">mapView&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">_&lt;/span> &lt;span class="n">mapView&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKMapView&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">viewFor&lt;/span> &lt;span class="n">annotation&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKAnnotation&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">-&amp;gt;&lt;/span> &lt;span class="n">MKAnnotationView&lt;/span>&lt;span class="p">?&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nv">annotationView&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">mapView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">dequeueReusableAnnotationView&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">withIdentifier&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">nil&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">for&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">annotation&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">// &amp;lt;- important&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">annotationView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">canShowCallout&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">annotationView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">annotation&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">annotation&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">annotationView&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This simple change lets the map view reuse annotation views when they move offscreen. The performance gained from this system is crucial for keeping the map scrolling smoothly when there are large quantities of annotations. As a tradeoff, this optimization will increase the memory used, but it is generally considered best practice.&lt;/p>
+&lt;h2 id="annotation-callouts">Annotation Callouts
+&lt;/h2>&lt;p>Typically, developers choose to add callout accessory views inside mapView(viewFor:), however this is actually a critical memory mistake since accessory view creation is not &lt;code>lazy&lt;/code>. Unless there is some special reason you need to create your accessory view inside mapView(viewFor:), you should instead create it in mapView(didSelect:).&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Performance testing results (Physical iPad pro 11inch iOS 14.6, restarted after each run):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 10k trials: 29mb in savings&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 100k trials: 92.8mb in savings + considerably shorter launch time&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">mapView&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">_&lt;/span> &lt;span class="n">mapView&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKMapView&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">didSelect&lt;/span> &lt;span class="n">view&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKAnnotationView&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">view&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">rightCalloutAccessoryView&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">UIButton&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="clustering-annotation-views">Clustering Annotation Views
+&lt;/h2>&lt;p>Clustering annotation views is a great way of reducing the number of annotations being rendered on screen - it should be used in almost all scenarios. Benefits from this optimization greatly outweigh the previous two optimizations in most scenarios. There are many great tutorials on clustering, so I won’t dive into it in this post.&lt;/p>
+&lt;h2 id="caching-user-location">Caching User Location
+&lt;/h2>&lt;p>Unless you need real time updating information, you should not be using &lt;code>mapView.showsUserLocation = true&lt;/code>, because it consumes a lot of energy (in my tests it was consuming ~10% of CPU.)&lt;/p>
+&lt;p>Instead, cache a pin and update it’s location manually.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">private&lt;/span> &lt;span class="kd">let&lt;/span> &lt;span class="nv">locationManager&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">CLLocationManager&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">private&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">userPin&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKPointAnnotation&lt;/span>&lt;span class="p">?&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">locationManager&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">_&lt;/span> &lt;span class="n">manager&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">CLLocationManager&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">didUpdateLocations&lt;/span> &lt;span class="n">locations&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">CLLocation&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">userPin&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">mapView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">removeAnnotation&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">userPin&lt;/span>&lt;span class="p">!)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nv">newUserPin&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">MKPointAnnotation&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">newUserPin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">coordinate&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">center&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">userPin&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">newUserPin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kc">self&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">mapView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">addAnnotation&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">userPin&lt;/span>&lt;span class="p">!)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Devices iOS 14+ are compatible with a manually placed “default” user location pin - devices bellow iOS 14 are stuck with whatever you come up with.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">mapView&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">_&lt;/span> &lt;span class="n">mapView&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKMapView&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">viewFor&lt;/span> &lt;span class="n">annotation&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKAnnotation&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">-&amp;gt;&lt;/span> &lt;span class="n">MKAnnotationView&lt;/span>&lt;span class="p">?&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">annotation&lt;/span> &lt;span class="p">===&lt;/span> &lt;span class="n">userPin&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="c1">// note the operator here&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="cp">#available&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="cp">iOS&lt;/span> &lt;span class="mf">14.0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="c1">// most devices get this nice pin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nv">v&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="cp">MKUserLocationView&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="cp">annotation&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="cp">annotation&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="cp">reuseIdentifier&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;upin&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">v&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">zPriority&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="bp">max&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">v&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">isEnabled&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">v&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">isOpaque&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">v&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nv">v&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">MKMarkerAnnotationView&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">annotation&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">annotation&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">reuseIdentifier&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;upin&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">v&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">glyphImage&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">UIImage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">systemName&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;person.circle.fill&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">v&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">isEnabled&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">v&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">isOpaque&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">v&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="getting-memory-to-release">Getting Memory to Release
+&lt;/h2>&lt;p>The biggest problem with map views is that they never release their memory. Apps using map views will often balloon to hundreds of mb of memory within a few scrolls. This memory will then refuse to be released, damaging the performance of the rest of the app/device. Unfortunately there is no &lt;code>mapView.clearCache()&lt;/code> function, so we will have to do it ourselves.&lt;/p>
+&lt;p>The solution is to create the map view programmatically, and delete/recreate when necessary. This optimization is highly application specific, so I leave it to the reader.&lt;/p></description></item></channel></rss>

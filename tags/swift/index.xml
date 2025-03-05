@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Swift on Nathan Barta</title><link>https://nathanbarta.com/tags/swift/</link><description>Recent content in Swift on Nathan Barta</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Mon, 09 Jan 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://nathanbarta.com/tags/swift/index.xml" rel="self" type="application/rss+xml"/><item><title>Notes on AVVideo Compression</title><link>https://nathanbarta.com/p/notes-avvideo-compression/</link><pubDate>Mon, 09 Jan 2023 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/notes-avvideo-compression/</guid><description>&lt;p>&lt;em>this post is a work in progress (~50% done) &amp;amp; may not be completely factual&lt;/em>&lt;/p>
+&lt;h1 id="notes-on-avvideo-compression">Notes on AVVideo Compression
+&lt;/h1>&lt;p>Recently I was tasked with fixing and adding new features to a video pipeline. Our app was supposed to record the user and save a compressed file to remote storage, however, our video files were getting corrupted. This post has some helpful information about Apple’s video encoding APIs. Not all information is 100% tested or factual - there is some speculation &amp;amp; I am not super knowledgable about this topic.&lt;/p>
+&lt;h2 id="compression-considerations">Compression Considerations
+&lt;/h2>&lt;p>Modern compression algorithms take into account spacial (intra-) and temporal (inter-) compression. Spacial compression is similar to text compression, it tries to compress pixels within a frame into the smallest form factor. Temporal compression stores the difference between frames, which means areas of video that don’t change much get stored much more compactly.&lt;/p>
+&lt;p>Two of the most common codecs are H264 and H265 (HEVC). They can both technically encode lossless, but the majority of users, including me, choose lossy settings. HEVC can store the same quality video in about 50% of the space as H264, however there are compatibility issues in browsers, so you should evaluate who’s going to be watching your videos, and what capabilities exist. I chose to offer configurations for both codecs. Our videos are stored in mp4 containers with no audio.&lt;/p>
+&lt;h2 id="compression-terms">Compression terms
+&lt;/h2>&lt;h3 id="bit-rate">Bit Rate
+&lt;/h3>&lt;p>Bit rate is the number of bits required to represent one second of video. In our case, one of our configurations was for HD (1080x720) @ 60fps, with a pixel format of 32_BGRA. This means, uncompressed, our video takes about 1080x720x32x60 = 1,492,992,000 (1492.992 mbit/s, ~1.5 Gbit/s). Since the average upload speed is currently ~23 Mbps (&lt;a class="link" href="https://www.speedtest.net/global-index/united-states#fixed%29" target="_blank" rel="noopener"
+>https://www.speedtest.net/global-index/united-states#fixed)&lt;/a>, it would take ~65sec to send 1 second of video &amp;amp; a single 26 second video would cost almost 5GB of storage.&lt;/p>
+&lt;p>For this reason, we select a bit rate far lower than what’s needed for uncompressed video.&lt;/p>
+&lt;p>Bit Rate = # of pixels * FPS * BPP&lt;/p>
+&lt;h3 id="bits-per-pixel-bpp">Bits per pixel (BPP)
+&lt;/h3>&lt;p>The number of bits to encode a pixel. 3 is considered “visually lossless”, which is a far cry from the 32 we were using in the above example. Selecting a number between 0.05 and 0.1 will have very noticeable differences. Numbers between 0.1 and 3 will usually have diminishing returns.&lt;/p>
+&lt;p>Multiplying the bit rate by 0.131072 can give you a loose estimate for the MAX number of MB/s your video will consume.&lt;/p>
+&lt;h3 id="keyframes-i-frames">Keyframes (I-Frames)
+&lt;/h3>&lt;p>There are multiple types of frames in a video. Keyframes are just a picture. If you were to have all keyframes, the video would only use spacial compression.&lt;/p>
+&lt;h3 id="p-frames-and-b-frames">P-Frames and B-Frames
+&lt;/h3>&lt;p>These frames are what makes temporal compression work. They represent the differences between frames &amp;amp; are placed between two keyframes.&lt;/p>
+&lt;h3 id="group-of-pictures-gop">Group of Pictures (GOP)
+&lt;/h3>&lt;p>Distance between two keyframes. I-Frames sandwich a group of P-Frames and B-Frames.&lt;/p>
+&lt;h2 id="avvideocompressionpropertieskey">AVVideoCompressionPropertiesKey
+&lt;/h2>&lt;p>This section has descriptions of what the basic AVVideoCompressionPropertiesKey’s do, as well as some VideoToolbox keys.&lt;/p>
+&lt;p>In my understanding, these settings are often seen as a “suggestion” to the encoder &amp;amp; may not always be followed as expected.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Considerations&lt;/th>
+&lt;th>Notes&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>AVVideoAverageBitRateKey&lt;/td>
+&lt;td>The average bit rate that the encoder will shoot for.&lt;/td>
+&lt;td>If this value is set too low &amp;amp; the encoder has no other options to degrade video quality to fit the bitrate target, the encoder will &lt;em>fail&lt;/em> and spit out a corrupt file. Give the encoder options, such as droppable frames, wider max GOP, wider QP (image quality) range. If the encoder is not struggling to fit into the bit rate, it will take up it’s space &amp;amp; return the highest quality video it can.&lt;/td>
+&lt;td>Documentation falsely states that this property only applies to H264.&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>AVVideoExpectedSourceFrameRateKey&lt;/td>
+&lt;td>The frame rate of the input device connected to the AVCaptureSession.&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>AVCaptureSession has basic presets available statically within code, however, there are additional device presets available during runtime (AVCaptureDevice.Format).&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>AVVideoMaxKeyFrameIntervalKey&lt;/td>
+&lt;td>Keyframe interval, aka GOP. 1 = 1th = every frame is a keyframe, 2 = 2nd = every other frame is a keyframe, 3 = 3rd = every third frame is a keyframe, etc…&lt;/td>
+&lt;td>Having all keyframes restricts the encoder to spacial compression only. This is MAX key frame interval. If you have extra space in the bitrate, the encoder will pick a smaller GOP (if a large GOP is a limiting factor to your video quality.) Setting the GOP too small can lead to blurry video because if the encoder is in a crunch, it will degrade QP.&lt;/td>
+&lt;td>Most encoders use a GOP length of 1-2 seconds, aka 30-60 frames @ 30fps, or 60-120 fps @60fps. &lt;a class="link" href="https://openradar.appspot.com/FB7528508" target="_blank" rel="noopener"
+>Default settings may differ in H264 &amp;amp; HEVC&lt;/a>. Documentation falsely states that this property only applies to H264.&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item><item><title>EZPT Exercise Markup Language (EZEML)</title><link>https://nathanbarta.com/p/ezeml/</link><pubDate>Thu, 22 Sep 2022 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/ezeml/</guid><description>&lt;p>This document is from my work at &lt;a class="link" href="https://www.ezpt.xyz/" target="_blank" rel="noopener"
+>ezpt.xyz&lt;/a>, where I worked as an iOS developer on their physical therapy application. My hope is that this language becomes an industry standard, or at least a stepping-stone for the future of exercise notation.&lt;/p>
+&lt;h2 id="why-are-we-creating-ezeml">Why are we creating EZEML?
+&lt;/h2>&lt;p>Workouts (aka Routines) on our app are constantly changing. Every time we modify what a workout looks like, we have to change our entire database schema. This is a difficult operation. With EZEML, our client-side app simply has to implement a version of EZEML that is high enough to run the current features. Existing workouts will not have to be migrated. The language will also be able to generate a human-readable description of the workout.&lt;/p>
+&lt;h2 id="what-constructs-does-ezeml-v1-implement">What constructs does EZEML v1 implement?
+&lt;/h2>&lt;ul>
+&lt;li>Sets &amp;amp; Reps&lt;/li>
+&lt;li>Drop/Pyramid/Ladder sets&lt;/li>
+&lt;li>Supersets/Circuits&lt;/li>
+&lt;li>Asymmetric (Unilateral) exercises (Ex: single leg RDL)&lt;/li>
+&lt;li>Weight, Time-based, RPE/ORM, Failure sets&lt;/li>
+&lt;/ul>
+&lt;h2 id="syntax">Syntax
+&lt;/h2>&lt;p>This section will introduce EZEML in increasing levels of complexity with examples before giving a technical definition.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Description&lt;/th>
+&lt;th>EZEML&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>5 sets of 5 squats&lt;/td>
+&lt;td>&lt;code>&amp;quot;squat&amp;quot;:5x5&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3 sets of squats to failure&lt;/td>
+&lt;td>&lt;code>&amp;quot;squat&amp;quot;:3xF&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3 sets of squats with reps of 4, 6, and 8&lt;/td>
+&lt;td>&lt;code>&amp;quot;squat&amp;quot;:3x(4,6,8)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3 sets of 8 squats with the last set to failure&lt;/td>
+&lt;td>&lt;code>&amp;quot;squat&amp;quot;:3x(8,8,F)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>2 sets of 8 reps bench at 125lbs&lt;/td>
+&lt;td>&lt;code>{&amp;quot;weight&amp;quot;:lbs}&amp;quot;bench&amp;quot;:2x8@125&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3 sets of 8 reps decreasing by 3 bench at 125lbs&lt;/td>
+&lt;td>&lt;code>{&amp;quot;weight&amp;quot;:lbs}&amp;quot;bench&amp;quot;:3x(8,5,2)@125&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Dropset of 4 sets, 4 reps, starting at 225lbs, drop by 15lbs deadlift&lt;/td>
+&lt;td>&lt;code>{&amp;quot;weight&amp;quot;:lbs}&amp;quot;deadlift&amp;quot;:4x(4@225,4@210,4@195,4@180&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Dropset of 4 sets, 4 reps increasing by 3, starting at 90lbs, drop by 15lbs overhead press&lt;/td>
+&lt;td>&lt;code>{&amp;quot;weight&amp;quot;:lbs}&amp;quot;overhead-press&amp;quot;:4x(4@90,7@75,10@60,13@45)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3 sets of 4 reps single leg RDL’s&lt;/td>
+&lt;td>&lt;code>&amp;quot;single-leg-rdl&amp;quot;:3x4:3x4&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3 sets of 4 reps on left leg, 3 sets of 5 reps on right leg, single leg RDL’s&lt;/td>
+&lt;td>&lt;code>&amp;quot;single-leg-rdl&amp;quot;:3x4:3x5&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>3 sets of 5 squats, 3 sets of 5 deadlift&lt;/td>
+&lt;td>&lt;code>&amp;quot;squat&amp;quot;:3x5;&amp;quot;deadlift&amp;quot;:3x5&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>4 sets of 10 overhead press, and superset of 3 sets of 5 squats, 3 sets of 5 deadlift.&lt;/td>
+&lt;td>&lt;code>&amp;quot;overhead-press&amp;quot;:4x10;super(&amp;quot;squat&amp;quot;:3x5;&amp;quot;deadlift&amp;quot;:3x5)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>4 sets of 60sec achilles iso hold&lt;/td>
+&lt;td>&lt;code>&amp;quot;achilles-iso&amp;quot;:4x60T&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>4 sets of 60, 80, 100, 120 sec, achilles iso hold&lt;/td>
+&lt;td>&lt;code>&amp;quot;achilles-iso&amp;quot;:4x(60T,80T,100T,120T)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>4 sets of 60 sec achilles iso hold with 40lbs&lt;/td>
+&lt;td>&lt;code>{&amp;quot;weight&amp;quot;:lbs}&amp;quot;achilles-iso&amp;quot;:4x(60T)@40&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>4 sets of 60 sec decreasing by 10sec achilles iso hold with 40lbs increasing by 10lbs&lt;/td>
+&lt;td>&lt;code>{&amp;quot;weight&amp;quot;:lbs}&amp;quot;achilles-iso&amp;quot;:4x(60T@40,50T@50,40T@60,30T@70)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>4 sets of 60sec single leg achilles iso hold&lt;/td>
+&lt;td>&lt;code>&amp;quot;single-leg-achilles-iso&amp;quot;:4x60T:4x60T&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>4 sets of 5 squats at 6 RPE&lt;/td>
+&lt;td>&lt;code>&amp;quot;squat&amp;quot;:4x5%6&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>EZEML v1.0 is made up of two sections, the header and the tokens (body.)&lt;/p>
+&lt;h3 id="syntax-the-header">Syntax: The Header
+&lt;/h3>&lt;p>The header is used for creating context for the computer. It can be omitted if you are using this notation by hand. Parameters are delimited by commas. You may also pass in key-value pairs not enumerated by this specification to be used in your implementation.&lt;/p>
+&lt;p>Parameters:&lt;/p>
+&lt;ul>
+&lt;li>&lt;em>required&lt;/em> &lt;code>version&lt;/code>: The version of EZEML it was written in.&lt;/li>
+&lt;li>&lt;em>required&lt;/em> &lt;code>weight&lt;/code>: The unit of weight for all the exercises. Supported weights: lbs (Pounds), kg (kilograms), st (stone).&lt;/li>
+&lt;li>&lt;code>rest-set&lt;/code>: The amount of rest between sets (seconds)&lt;/li>
+&lt;li>&lt;code>rest-exercise&lt;/code>: The amount of rest between exercises (seconds). Behavior of this parameter when it comes to supersets is left to the implementation.&lt;/li>
+&lt;li>&lt;code>name&lt;/code>: The name for the workout. Workouts do not have to be named.&lt;/li>
+&lt;/ul>
+&lt;p>Example: &lt;code>{&amp;quot;version&amp;quot;:&amp;quot;1.0&amp;quot;,&amp;quot;weight&amp;quot;:&amp;quot;lbs&amp;quot;,&amp;quot;rest-set&amp;quot;:30,&amp;quot;rest-exercise&amp;quot;:60,&amp;quot;name&amp;quot;:&amp;quot;Strength program 2&amp;quot;}&lt;/code>&lt;/p>
+&lt;h3 id="syntax-the-body">Syntax: The Body
+&lt;/h3>&lt;p>A token is an exercise within a workout. They are separated by “;”. There are two types of tokens: Single, and Super. There is also a Circuit token, which is an alias of Super. Single is a single exercise. Super is a collection (superset) of tokens (other exercises) - however these tokens have the restriction of no supersets, since EZEML v1.0 prohibits nested supersets. A Single token has two parts, name and work - separated by “:”. The name is the name of an exercise. The work is what you’ll be doing for that exercise. Names follow naming conventions in Rules (next section.) Work can further be separated by another “:” in certain cases (asymmetric exercises). A Super token surrounds a collection of Single tokens with function-like syntax &lt;code>super(...)&lt;/code>. A Circuit is the same as a Super, it is a generalized grouping of exercises, while a superset is usually designed with a “push pull” aspect.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Type&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Syntax&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Single&lt;/td>
+&lt;td>A single exercise with a name and work.&lt;/td>
+&lt;td>&lt;code>&amp;quot;NAME&amp;quot;:WORK&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Super&lt;/td>
+&lt;td>A collection of other tokens&lt;/td>
+&lt;td>&lt;code>super(SINGLE;...)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Circuit&lt;/td>
+&lt;td>A collection of other tokens&lt;/td>
+&lt;td>&lt;code>circuit(SINGLE;...)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>There are 4 kinds of work: None, Standard, Standard Varied, Asymmetric.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Kind&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Syntax&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>None&lt;/td>
+&lt;td>No Work.&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Standard&lt;/td>
+&lt;td>SETS and REPS delimited by “x”.&lt;/td>
+&lt;td>&lt;code>SETSxREPS&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Standard Varied&lt;/td>
+&lt;td>SETS and (variable) REPS delimited by “x”.&lt;/td>
+&lt;td>&lt;code>SETSx(REPS,...)&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Asymmetric&lt;/td>
+&lt;td>A standard or standard varied or none kind on each side of “:” delimiter.&lt;/td>
+&lt;td>&lt;code>STANDARD:STANDARD&lt;/code> or &lt;code>STANDARD:STANDARD_VARIED&lt;/code> or &lt;code>STANDARD:NONE&lt;/code> or &lt;code>STANDARD_VARIED:STANDARD&lt;/code> or &lt;code>STANDARD_VARIED:STANDARD_VARIED&lt;/code> or &lt;code>STANDARD_VARIED:NONE&lt;/code> or &lt;code>NONE:STANDARD&lt;/code> or &lt;code>NONE:STANDARD_VARIED&lt;/code> or &lt;code>NONE:NONE&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>Reps can have modifiers attached to them. Modifiers follow a precedence, and should be applied top to bottom in the following chart. RPE cannot be combined with weight, but it can be combined with time.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Modifier&lt;/th>
+&lt;th>Description&lt;/th>
+&lt;th>Syntax&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Time&lt;/td>
+&lt;td>Makes reps be time-based instead of repetition based.&lt;/td>
+&lt;td>&lt;code>REPST&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Weight&lt;/td>
+&lt;td>Designates how much weight you should be lifting for a given rep.&lt;/td>
+&lt;td>&lt;code>STANDARD@WEIGHT&lt;/code> or &lt;code>STANDARD_VARIED@WEIGHT&lt;/code> or inside &lt;code>STANDARD_VARIED&lt;/code> like &lt;code>SETSx(REPS@WEIGHT,...)&lt;/code> aka &lt;code>REPS@WEIGHT&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RPE&lt;/td>
+&lt;td>Designates the intensity of the rep.&lt;/td>
+&lt;td>&lt;code>STANDARD@RPE&lt;/code> or &lt;code>STANDARD_VARIED@RPE&lt;/code> or inside &lt;code>STANDARD_VARIED&lt;/code> like &lt;code>SETSx(REPS@RPE,...)&lt;/code> aka &lt;code>REPS@RPE&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="rules-not-exhaustive">Rules (Not exhaustive)
+&lt;/h2>&lt;ul>
+&lt;li>Acceptable characters for naming (workouts and exercises): a-z, A-Z, &amp;quot; “, “-”, 0-9, “’”, “,”, “:”, “%”, “°”, “+”, “/”, “&amp;amp;”, “@”, “&amp;lt;”, “&amp;gt;”, “#”, “(”, “)”.&lt;/li>
+&lt;li>You cannot currently put a superset inside of a superset&lt;/li>
+&lt;li>If you modify weight for one set, you must explicitly set it for the other sets too&lt;/li>
+&lt;li>If a symetrical exercise has an asymetrical/unilateral variation (RDL’s, single leg RDL’s), you should not use asymetrical notation on the symetric version. All named exercises have a concrete description. While a single arm bench might exist, you should name it “single-arm-bench” (or something else) instead of “bench”.&lt;/li>
+&lt;li>Time must be notated in seconds. (Ex: 1 minute and 20 seconds -&amp;gt; 80sec)&lt;/li>
+&lt;li>Time sets may not be combined with rep sets. This goes back to “all named exercises have a concrete description” point. You may however superset a rep set and a time set for a similar effect.&lt;/li>
+&lt;li>The max number for reps, sets, weight, and time, is currently 65535.&lt;/li>
+&lt;li>Fractional weight is accepted up to 2 decimal places.&lt;/li>
+&lt;li>Exercise names have a minimum length of 1 and max of 128 characters (Ex: &lt;em>nathans-super-epic-amazing-special-exercise-with-some-awesomely-cool-modifications-and-a-super-long-name-that-has-128-characters&lt;/em>.)&lt;/li>
+&lt;li>Supersets must have 2 or more exercises&lt;/li>
+&lt;li>STANDARD_VARIED SETS and number of REPS terms must match (Ex: 3x(4,4,4) &lt;em>right&lt;/em>, 3x(4,4) &lt;em>wrong&lt;/em>.)&lt;/li>
+&lt;/ul>
+&lt;h2 id="parsing">Parsing
+&lt;/h2>&lt;p>EZEML is simple enough that you don’t need node trees or other data structures. However, the implementation is your choice. You can parse all tokens at once, or parse “by the wire,” one token at a time (iterating over the lexemes) - however depending on the source of your EZEML files you may need to call a validation function to ensure the syntax is correct.&lt;/p>
+&lt;h2 id="files--compression">Files &amp;amp; Compression
+&lt;/h2>&lt;p>A file should contain a single workout. The file extension is &lt;em>.ezml&lt;/em>. EZEML is meant to be human readable, however you are free to add a layer of abstraction and add lossless compression if you wish. We suggest you use the file extension &lt;em>.ezmlc&lt;/em> for compressed EZEML.&lt;/p>
+&lt;h2 id="faq">FAQ
+&lt;/h2>&lt;ul>
+&lt;li>&lt;strong>How do I notate ROM?&lt;/strong> EZEML does not currently support ROM. Create separate exercises for different ROM. (Ex: “squat-parallel”, “squat-atg”)&lt;/li>
+&lt;li>&lt;strong>How do I notate tempo?&lt;/strong> EZEML does not currently support tempo. Create separate exercises for different tempo. (Ex: “bench-4-2-1”). You could also make a timeset with weight - which works well for eccentric exercises.&lt;/li>
+&lt;li>&lt;strong>How do I notate negatives?&lt;/strong> Negatives are considered separate exercises than their “positives” counterparts, so just name them differently (Ex: “neg-bench”)&lt;/li>
+&lt;/ul></description></item><item><title>Maxing out MapKit: Optimizing map views for high performance</title><link>https://nathanbarta.com/p/maxing-out-mapkit/</link><pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/maxing-out-mapkit/</guid><description>&lt;p>All changes require minimal code changes and boost performance substantially. This is not a tutorial on how to use a map view.&lt;/p>
+&lt;h2 id="dequeue">Dequeue
+&lt;/h2>&lt;p>If you are looking at this blog, there is a high chance you already know the following optimization.&lt;/p>
+&lt;p>Map Views are set up very similarly to Table Views from an interface perspective. Developers should make sure they dequeue MKMapAnnotations.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">mapView&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">_&lt;/span> &lt;span class="n">mapView&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKMapView&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">viewFor&lt;/span> &lt;span class="n">annotation&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKAnnotation&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">-&amp;gt;&lt;/span> &lt;span class="n">MKAnnotationView&lt;/span>&lt;span class="p">?&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nv">annotationView&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">mapView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">dequeueReusableAnnotationView&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">withIdentifier&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">nil&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="k">for&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">annotation&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">// &amp;lt;- important&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">annotationView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">canShowCallout&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">annotationView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">annotation&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">annotation&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">annotationView&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>This simple change lets the map view reuse annotation views when they move offscreen. The performance gained from this system is crucial for keeping the map scrolling smoothly when there are large quantities of annotations. As a tradeoff, this optimization will increase the memory used, but it is generally considered best practice.&lt;/p>
+&lt;h2 id="annotation-callouts">Annotation Callouts
+&lt;/h2>&lt;p>Typically, developers choose to add callout accessory views inside mapView(viewFor:), however this is actually a critical memory mistake since accessory view creation is not &lt;code>lazy&lt;/code>. Unless there is some special reason you need to create your accessory view inside mapView(viewFor:), you should instead create it in mapView(didSelect:).&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// Performance testing results (Physical iPad pro 11inch iOS 14.6, restarted after each run):&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 10k trials: 29mb in savings&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// 100k trials: 92.8mb in savings + considerably shorter launch time&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">mapView&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">_&lt;/span> &lt;span class="n">mapView&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKMapView&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">didSelect&lt;/span> &lt;span class="n">view&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKAnnotationView&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">view&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">rightCalloutAccessoryView&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">UIButton&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="clustering-annotation-views">Clustering Annotation Views
+&lt;/h2>&lt;p>Clustering annotation views is a great way of reducing the number of annotations being rendered on screen - it should be used in almost all scenarios. Benefits from this optimization greatly outweigh the previous two optimizations in most scenarios. There are many great tutorials on clustering, so I won’t dive into it in this post.&lt;/p>
+&lt;h2 id="caching-user-location">Caching User Location
+&lt;/h2>&lt;p>Unless you need real time updating information, you should not be using &lt;code>mapView.showsUserLocation = true&lt;/code>, because it consumes a lot of energy (in my tests it was consuming ~10% of CPU.)&lt;/p>
+&lt;p>Instead, cache a pin and update it’s location manually.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">private&lt;/span> &lt;span class="kd">let&lt;/span> &lt;span class="nv">locationManager&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">CLLocationManager&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">private&lt;/span> &lt;span class="kd">var&lt;/span> &lt;span class="nv">userPin&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKPointAnnotation&lt;/span>&lt;span class="p">?&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">locationManager&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">_&lt;/span> &lt;span class="n">manager&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">CLLocationManager&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">didUpdateLocations&lt;/span> &lt;span class="n">locations&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="n">CLLocation&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">//...&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">userPin&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="kc">nil&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">mapView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">removeAnnotation&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">userPin&lt;/span>&lt;span class="p">!)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nv">newUserPin&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">MKPointAnnotation&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">newUserPin&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">coordinate&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">center&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">userPin&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">newUserPin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kc">self&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">mapView&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">addAnnotation&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">self&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">userPin&lt;/span>&lt;span class="p">!)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Devices iOS 14+ are compatible with a manually placed “default” user location pin - devices bellow iOS 14 are stuck with whatever you come up with.&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-swift" data-lang="swift">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">func&lt;/span> &lt;span class="nf">mapView&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">_&lt;/span> &lt;span class="n">mapView&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKMapView&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">viewFor&lt;/span> &lt;span class="n">annotation&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">MKAnnotation&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">-&amp;gt;&lt;/span> &lt;span class="n">MKAnnotationView&lt;/span>&lt;span class="p">?&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">annotation&lt;/span> &lt;span class="p">===&lt;/span> &lt;span class="n">userPin&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="c1">// note the operator here&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="cp">#available&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="cp">iOS&lt;/span> &lt;span class="mf">14.0&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="o">*&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="c1">// most devices get this nice pin&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nv">v&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="cp">MKUserLocationView&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="cp">annotation&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="cp">annotation&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="cp">reuseIdentifier&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;upin&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">v&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">zPriority&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">.&lt;/span>&lt;span class="bp">max&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">v&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">isEnabled&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">v&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">isOpaque&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">v&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span> &lt;span class="k">else&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="kd">let&lt;/span> &lt;span class="nv">v&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">MKMarkerAnnotationView&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">annotation&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="n">annotation&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">reuseIdentifier&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;upin&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">v&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">glyphImage&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">UIImage&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">systemName&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s">&amp;#34;person.circle.fill&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">v&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">isEnabled&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">false&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">v&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">isOpaque&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">v&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="getting-memory-to-release">Getting Memory to Release
+&lt;/h2>&lt;p>The biggest problem with map views is that they never release their memory. Apps using map views will often balloon to hundreds of mb of memory within a few scrolls. This memory will then refuse to be released, damaging the performance of the rest of the app/device. Unfortunately there is no &lt;code>mapView.clearCache()&lt;/code> function, so we will have to do it ourselves.&lt;/p>
+&lt;p>The solution is to create the map view programmatically, and delete/recreate when necessary. This optimization is highly application specific, so I leave it to the reader.&lt;/p></description></item><item><title>My Favorite Swift/iOS/MacOS Resources</title><link>https://nathanbarta.com/p/my-favorites/</link><pubDate>Tue, 20 Sep 2022 00:00:00 +0000</pubDate><guid>https://nathanbarta.com/p/my-favorites/</guid><description>&lt;p>&lt;em>this page got corrupted&amp;hellip; I&amp;rsquo;ll fix it eventually&lt;/em>&lt;/p>
+&lt;h1 id="resources">Resources
+&lt;/h1>&lt;p>Originally written for the #swift-dev branch of PittCSC&lt;/p>
+&lt;h2 id="iosmacos-application-development--swift">iOS/MacOS Application Development &amp;amp; Swift
+&lt;/h2>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Topics&lt;/th>
+&lt;th>Post Frequency&lt;/th>
+&lt;th>Reading-level&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;a class="link" href="https://www.swiftbysundell.com/" target="_blank" rel="noopener"
+>Swift by Sundell&lt;/a>&lt;/td>
+&lt;td>Articles, Tutorials, Swift&lt;/td>
+&lt;td>Frequent&lt;/td>
+&lt;td>Beginner-Advanced&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a class="link" href="https://useyourloaf.com/archives/" target="_blank" rel="noopener"
+>UseYourLoaf&lt;/a>&lt;/td>
+&lt;td>Debugging, testing, assorted&lt;/td>
+&lt;td>Weekly&lt;/td>
+&lt;td>Intermediate-Advanced&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a class="link" href="https://www.hackingwithswift.com/articles" target="_blank" rel="noopener"
+>HackingWithSwift&lt;/a>&lt;/td>
+&lt;td>Tutorials, career&lt;/td>
+&lt;td>Occasional&lt;/td>
+&lt;td>Beginner&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;a class="link" href="https://theswiftdev.com/" target="_blank" rel="noopener"
+>TheSwiftDev&lt;/a>&lt;/td>
+&lt;td>Tutorials, Vapor, SPM, design patterns, assorted&lt;/td>
+&lt;td>Every other week&lt;/td>
+&lt;td>Intermediate - Advanced&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SwiftRocks&lt;/td>
+&lt;td>Deployment, security, internals&lt;/td>
+&lt;td>Monthly… sometimes&lt;/td>
+&lt;td>Advanced&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RDerik&lt;/td>
+&lt;td>Security, environment&lt;/td>
+&lt;td>Monthly… sometimes&lt;/td>
+&lt;td>Advanced&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Donny Wals&lt;/td>
+&lt;td>Data, JSON, Combine&lt;/td>
+&lt;td>Every other week&lt;/td>
+&lt;td>Intermediate - Advanced&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Dave DeLong&lt;/td>
+&lt;td>HTTP with Swift, compiler&lt;/td>
+&lt;td>Monthly… sometimes&lt;/td>
+&lt;td>Beginner - Advanced&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>TheAtomicBirdhouse&lt;/td>
+&lt;td>Assorted, CloudKit&lt;/td>
+&lt;td>Monthly… sometimes&lt;/td>
+&lt;td>Intermediate - Advanced&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>iOSGoodies&lt;/td>
+&lt;td>Newsletter, shoutouts&lt;/td>
+&lt;td>Weekly&lt;/td>
+&lt;td>Beginner - Advanced&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>AndyIbanez&lt;/td>
+&lt;td>Assorted&lt;/td>
+&lt;td>Weekly&lt;/td>
+&lt;td>Beginner - Advanced&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>DanielSaidi&lt;/td>
+&lt;td>SPM&lt;/td>
+&lt;td>Monthly… sometimes&lt;/td>
+&lt;td>Beginner - Advanced&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>RayWenderlich&lt;/td>
+&lt;td>Tutorials&lt;/td>
+&lt;td>Weekly&lt;/td>
+&lt;td>Beginner - Advanced&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Swiftjectivec&lt;/td>
+&lt;td>Tutorials&lt;/td>
+&lt;td>Frequent&lt;/td>
+&lt;td>Beginner-Advanced&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Erica Sadun Assorted Occasional Intermediate-Advanced&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Igor Kulman Tutorials Monthly Intermediate-Advanced&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>SarunW Tutorials Almost daily Beginner-Advanced&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Belkadan Software Articles, Low-Level, Swift Monthly Beginner-Advanced&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table></description></item></channel></rss>
